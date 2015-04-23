@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -16,6 +17,7 @@ import android.widget.ListView;
  * interface.
  */
 public class Headlines extends ListFragment {
+    String TAG ="LifeCycle";
     OnHeadlineSelectedListener mCallback;
 
     // The container Activity must implement this interface so the frag can deliver messages
@@ -26,8 +28,8 @@ public class Headlines extends ListFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG,"headline oncreate");
         super.onCreate(savedInstanceState);
-
         // We need to use a different list item layout for devices older than Honeycomb
         int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
                 android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;
@@ -38,6 +40,8 @@ public class Headlines extends ListFragment {
 
     @Override
     public void onStart() {
+        Log.i(TAG,"headline onStart");
+
         super.onStart();
 
         // When in two-pane layout, set the listview to highlight the selected list item
@@ -49,6 +53,8 @@ public class Headlines extends ListFragment {
 
     @Override
     public void onAttach(Activity activity) {
+        Log.i(TAG,"headline onAttach");
+
         super.onAttach(activity);
 
         // This makes sure that the container activity has implemented
@@ -61,6 +67,32 @@ public class Headlines extends ListFragment {
         }
     }
 
+    @Override
+    public void onResume(){
+        Log.i(TAG,"headline onResume");
+
+        super.onResume();
+    }
+    @Override
+    public void onPause(){
+        Log.i(TAG,"headline onPause");
+        super.onPause();
+    }
+    @Override
+    public  void onStop(){
+        Log.i(TAG,"headline onStop");
+        super.onStop();
+    }
+    @Override
+    public  void  onDestroy(){
+        Log.i(TAG,"headline onDestroy");
+        super.onDestroy();
+    }
+    @Override
+    public  void onDetach(){
+        Log.i(TAG,"headline onDetach");
+        super.onDetach();
+    }
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         // Notify the parent activity of selected item
